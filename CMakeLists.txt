@@ -12,7 +12,7 @@ set(LIBRARY_NAME ${PROJECT_NAME})
 # Project name
 project(${PROJECT_NAME} VERSION ${PROJECT_VERSION})
 
-# Set the C++ files to complie
+# Set the C++ files to compile
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 # Create the library
