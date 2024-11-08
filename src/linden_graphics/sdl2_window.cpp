@@ -11,8 +11,8 @@ namespace linden::graphics
 
     SDL2Window::~SDL2Window()
     {
-        if (_window_handle) SDL_DestroyWindow(_window_handle);
         if (_renderer_handle) SDL_DestroyRenderer(_renderer_handle);
+        if (_window_handle) SDL_DestroyWindow(_window_handle);
     }
 
     void SDL2Window::add_window_renderer()
