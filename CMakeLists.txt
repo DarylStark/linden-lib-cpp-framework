@@ -15,5 +15,26 @@ project(${PROJECT_NAME} VERSION ${PROJECT_VERSION})
 # Set the C++ files to compile
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
+
 # Create the library
 add_library(${LIBRARY_NAME} ${SOURCES})
+
+# Fetch SDL2 using FetchContent
+include(FetchContent)
+
+# Ensure SDL2_VERSION and SDL2_INSTALL_DIR are set
+set(SDL2_VERSION 2.30.9)
+set(SDL2_INSTALL_DIR ${CMAKE_BINARY_DIR}/dependencies/SDL2)
+
+FetchContent_Declare(
+  SDL2
+  URL https://github.com/libsdl-org/SDL/archive/refs/tags/release-${SDL2_VERSION}.tar.gz
+  SOURCE_DIR ${SDL2_INSTALL_DIR}/src
+  BINARY_DIR ${SDL2_INSTALL_DIR}/build
+)
+
+FetchContent_MakeAvailable(SDL2)
+
+# Link SDL2 to your library
+target_link_libraries(${LIBRARY_NAME} SDL2)
+
