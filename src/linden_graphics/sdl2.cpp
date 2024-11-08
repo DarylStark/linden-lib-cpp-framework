@@ -24,6 +24,9 @@ namespace linden::graphics
                                    Size size)
     {
         // TODO: Make the flags configurable
-        return SDL2Window(title, position, size, SDL_WINDOW_SHOWN);
+        // TODO: This is copied. That might be a badddd idea
+        SDL2Window window(title, position, size, SDL_WINDOW_SHOWN);
+        window.add_window_renderer();
+        return window;
     }
 }  // namespace linden::graphics
