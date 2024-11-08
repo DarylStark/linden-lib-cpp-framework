@@ -2,9 +2,11 @@
 
 #include <SDL2/SDL.h>
 
+#include <memory>
 #include <string>
 
 #include "models.h"
+#include "sdl2_renderer.h"
 
 namespace linden::graphics
 {
@@ -12,7 +14,7 @@ namespace linden::graphics
     {
     private:
         SDL_Window* _window_handle;
-        SDL_Renderer* _renderer_handle;
+        std::shared_ptr<SDL2Renderer> _renderer;
 
     public:
         SDL2Window(const std::string& title, Position position, Size size,
@@ -22,8 +24,10 @@ namespace linden::graphics
         // Add parts
         void add_window_renderer();
 
-        // Retrievers
-        SDL_Window* get_window_handle() const;
-        SDL_Renderer* get_renderer_handle() const;
+        // Retrieve "our" objects
+        std::shared_ptr<SDL2Renderer> get_renderer() const;
+
+        // Retrievers for SDL2 handles
+        SDL_Window* get_sdl2_window_handle() const;
     };
 }  // namespace linden::graphics
