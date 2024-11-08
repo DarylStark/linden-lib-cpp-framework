@@ -24,6 +24,10 @@ namespace linden::graphics
         // Add parts
         void add_window_renderer();
 
+        // Retrieve window information
+        Size get_window_size() const;
+        Size get_drawable_size() const;
+
         // Retrieve "our" objects
         std::shared_ptr<SDL2Renderer> get_renderer() const;
 
