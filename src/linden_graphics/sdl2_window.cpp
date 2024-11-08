@@ -38,6 +38,13 @@ namespace linden::graphics
         return {width, height};
     }
 
+    Position SDL2Window::get_window_position() const
+    {
+        int x, y;
+        SDL_GetWindowPosition(_window_handle, &x, &y);
+        return {x, y};
+    }
+
     SDL_Window* SDL2Window::get_sdl2_window_handle() const
     {
         return _window_handle;

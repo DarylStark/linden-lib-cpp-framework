@@ -27,6 +27,7 @@ namespace linden::graphics
         // Retrieve window information
         Size get_window_size() const;
         Size get_drawable_size() const;
+        Position get_window_position() const;
 
         // Retrieve "our" objects
         std::shared_ptr<SDL2Renderer> get_renderer() const;
