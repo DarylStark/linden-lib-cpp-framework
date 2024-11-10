@@ -6,7 +6,7 @@ namespace linden::graphics
                            Size size, uint32_t flags)
     {
         _window_handle = SDL_CreateWindow(title.c_str(), position.x, position.y,
-                                          3456, 2160, flags);
+                                          size.width, size.height, flags);
         return;
     }
 
