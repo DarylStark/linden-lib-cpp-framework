@@ -1,5 +1,3 @@
-#pragma once
-
 #include "sdl2_renderer.h"
 
 #include <SDL2/SDL.h>
