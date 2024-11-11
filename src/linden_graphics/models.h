@@ -25,6 +25,7 @@ namespace linden::graphics
 
     struct TextureRenderOptions
     {
+        bool active = true;
         Position position;
         Size size;
         double angle;

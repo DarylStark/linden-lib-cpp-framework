@@ -44,6 +44,8 @@ namespace linden::graphics
     void SDL2Renderer::render_texture(const SDL2Texture& texture,
                                       TextureRenderOptions options)
     {
+        if (!options.active) return;
+
         SDL_Rect rect;
         rect.x = options.position.x;
         rect.y = options.position.y;
