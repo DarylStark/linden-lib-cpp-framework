@@ -21,4 +21,16 @@ namespace linden::graphics
     {
         return _renderer_handle;
     }
+
+    void SDL2Renderer::clear()
+    {
+        SDL_RenderClear(_renderer_handle);
+    }
+
+    void SDL2Renderer::clear(Color color)
+    {
+        SDL_SetRenderDrawColor(_renderer_handle, color.r, color.g, color.b,
+                               color.a);
+        SDL_RenderClear(_renderer_handle);
+    }
 };  // namespace linden::graphics

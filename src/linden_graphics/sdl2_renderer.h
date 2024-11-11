@@ -2,6 +2,8 @@
 
 #include <SDL2/SDL.h>
 
+#include "models.h"
+
 namespace linden::graphics
 {
     class SDL2Renderer
@@ -15,5 +17,9 @@ namespace linden::graphics
 
         // Get native SDL2 handle
         SDL_Renderer* get_sdl2_renderer_handle() const;
+
+        // Renderer altering
+        void clear();
+        void clear(Color color);
     };
 }  // namespace linden::graphics
