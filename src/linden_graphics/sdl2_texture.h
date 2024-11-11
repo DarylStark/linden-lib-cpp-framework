@@ -4,7 +4,12 @@
 #include <string>
 
 #include "models.h"
-#include "sdl2_renderer.h"
+
+// Forward declaration of SDL2Texture
+namespace linden::graphics
+{
+    class SDL2Renderer;
+}
 
 // TODO: Mulitple header and CPP files instead of three classes in one?
 
@@ -33,6 +38,9 @@ namespace linden::graphics
 
         // Texture altering
         void set_alpha(uint8_t alpha);
+
+        // Get texture information
+        Size get_size() const;
     };
 
     class SDL2StaticTexture : public SDL2Texture

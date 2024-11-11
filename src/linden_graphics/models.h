@@ -22,4 +22,14 @@ namespace linden::graphics
         int width;
         int height;
     };
+
+    struct TextureRenderOptions
+    {
+        Position position;
+        Size size;
+        double angle;
+        Position rotation_center;
+        bool flip_horizontal;
+        bool flip_vertical;
+    };
 }  // namespace linden::graphics

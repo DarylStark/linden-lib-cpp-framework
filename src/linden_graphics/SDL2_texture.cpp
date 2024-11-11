@@ -2,6 +2,8 @@
 
 #include <SDL_image.h>
 
+#include "sdl2_renderer.h"
+
 namespace linden::graphics
 {
     SDL2Texture::SDL2Texture(const SDL2Renderer& renderer, TextureAccess access,
@@ -27,6 +29,13 @@ namespace linden::graphics
     void SDL2Texture::set_alpha(uint8_t alpha)
     {
         SDL_SetTextureAlphaMod(_texture, alpha);
+    }
+
+    Size SDL2Texture::get_size() const
+    {
+        int width, height;
+        SDL_QueryTexture(_texture, nullptr, nullptr, &width, &height);
+        return {width, height};
     }
 
     SDL2StaticTexture::SDL2StaticTexture(const SDL2Renderer& renderer,

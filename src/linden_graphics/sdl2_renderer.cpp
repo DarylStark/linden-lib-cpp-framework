@@ -2,6 +2,8 @@
 
 #include <SDL2/SDL.h>
 
+#include "sdl2_texture.h"
+
 namespace linden::graphics
 {
     SDL2Renderer::SDL2Renderer(SDL_Window* window_handle)
@@ -32,5 +34,23 @@ namespace linden::graphics
         SDL_SetRenderDrawColor(_renderer_handle, color.r, color.g, color.b,
                                color.a);
         SDL_RenderClear(_renderer_handle);
+    }
+
+    void SDL2Renderer::render()
+    {
+        SDL_RenderPresent(_renderer_handle);
+    }
+
+    void SDL2Renderer::render_texture(const SDL2Texture& texture,
+                                      TextureRenderOptions options)
+    {
+        SDL_Rect rect;
+        rect.x = options.position.x;
+        rect.y = options.position.y;
+        rect.w = options.size.width;
+        rect.h = options.size.height;
+
+        SDL_RenderCopyEx(_renderer_handle, texture.get_sdl2_texture_handle(),
+                         nullptr, &rect, options.angle, nullptr, SDL_FLIP_NONE);
     }
 };  // namespace linden::graphics

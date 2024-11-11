@@ -4,6 +4,12 @@
 
 #include "models.h"
 
+// Forward declaration of SDL2Texture
+namespace linden::graphics
+{
+    class SDL2Texture;
+}
+
 namespace linden::graphics
 {
     class SDL2Renderer
@@ -21,5 +27,10 @@ namespace linden::graphics
         // Renderer altering
         void clear();
         void clear(Color color);
+        void render();
+
+        // Textures
+        void render_texture(const SDL2Texture& texture,
+                            TextureRenderOptions options);
     };
 }  // namespace linden::graphics
