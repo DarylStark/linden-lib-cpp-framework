@@ -18,7 +18,7 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 # Create the library
 add_library(${LIBRARY_NAME} ${SOURCES})
 
-# Fetch SDL2 using FetchContent
+# Fetch SDL2 and SDL2_image using FetchContent
 include(FetchContent)
 
 # Ensure SDL2_VERSION and SDL2_INSTALL_DIR are set
@@ -41,8 +41,8 @@ FetchContent_Declare(
   BINARY_DIR ${SDL2_IMAGE_INSTALL_DIR}/build
 )
 
-FetchContent_MakeAvailable(SDL2 SDL2_Image)
+# Make the SDL libraries available
+FetchContent_MakeAvailable(SDL2 SDL2_image)
 
-# Link SDL2 to your library
+# Link SDL2 and SDL2_image to your library
 target_link_libraries(${LIBRARY_NAME} SDL2 SDL2_image)
-

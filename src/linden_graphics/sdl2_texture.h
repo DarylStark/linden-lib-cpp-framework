@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL2/SDL.h>
 
+#include <string>
+
 #include "models.h"
 #include "sdl2_renderer.h"
 
@@ -19,6 +21,7 @@ namespace linden::graphics
     {
     protected:
         SDL_Texture* _texture;
+        SDL2Texture() = default;
 
     public:
         SDL2Texture(const SDL2Renderer& renderer, TextureAccess access,
@@ -65,6 +68,12 @@ namespace linden::graphics
     {
     public:
         SDL2TargetTexture(const SDL2Renderer& renderer, Size size);
+    };
+
+    class SDL2ImageTexture : public SDL2Texture
+    {
+    public:
+        SDL2ImageTexture(const SDL2Renderer& renderer, const std::string& path);
     };
 
 }  // namespace linden::graphics
