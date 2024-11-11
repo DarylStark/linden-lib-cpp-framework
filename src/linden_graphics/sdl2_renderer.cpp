@@ -58,6 +58,8 @@ namespace linden::graphics
             options.size.height = texture.get_size().height;
         options.size.width *= options.scale;
         options.size.height *= options.scale;
+        options.rotation_center.x *= options.scale;
+        options.rotation_center.y *= options.scale;
 
         SDL_Rect rect;
         rect.x = options.position.x;
