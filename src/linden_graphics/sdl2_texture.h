@@ -4,6 +4,8 @@
 #include "models.h"
 #include "sdl2_renderer.h"
 
+// TODO: Mulitple header and CPP files instead of three classes in one?
+
 namespace linden::graphics
 {
     enum class TextureAccess
