@@ -41,6 +41,12 @@ namespace linden::graphics
         SDL_RenderPresent(_renderer_handle);
     }
 
+    void SDL2Renderer::render_texture(const SDL2Texture& texture)
+    {
+        SDL_RenderCopy(_renderer_handle, texture.get_sdl2_texture_handle(),
+                       nullptr, nullptr);
+    }
+
     void SDL2Renderer::render_texture(const SDL2Texture& texture,
                                       TextureRenderOptions options)
     {
@@ -52,7 +58,12 @@ namespace linden::graphics
         rect.w = options.size.width;
         rect.h = options.size.height;
 
+        uint32_t flip = 0;
+        if (options.flip_horizontal) flip |= SDL_FLIP_HORIZONTAL;
+        if (options.flip_vertical) flip |= SDL_FLIP_VERTICAL;
+
         SDL_RenderCopyEx(_renderer_handle, texture.get_sdl2_texture_handle(),
-                         nullptr, &rect, options.angle, nullptr, SDL_FLIP_NONE);
+                         nullptr, &rect, options.angle, nullptr,
+                         static_cast<SDL_RendererFlip>(flip));
     }
 };  // namespace linden::graphics

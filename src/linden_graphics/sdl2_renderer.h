@@ -30,6 +30,7 @@ namespace linden::graphics
         void render();
 
         // Textures
+        void render_texture(const SDL2Texture& texture);
         void render_texture(const SDL2Texture& texture,
                             TextureRenderOptions options);
     };
