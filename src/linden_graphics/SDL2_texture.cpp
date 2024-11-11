@@ -71,7 +71,7 @@ namespace linden::graphics
         uint32_t* pixel_data = static_cast<uint32_t*>(_pixels);
 
         pixel_data[position.y * (_pitch / 4) + position.x] =
-            (color.a << 24) | (color.b << 16) | (color.g << 8) | color.r;
+            (color.a << 24) | (color.r << 16) | (color.g << 8) | color.b;
         asm("nop");
     }
 
