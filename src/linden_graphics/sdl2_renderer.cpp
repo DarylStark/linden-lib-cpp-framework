@@ -9,6 +9,7 @@ namespace linden::graphics
         // TODO: Make the flags configurable
         _renderer_handle =
             SDL_CreateRenderer(window_handle, -1, SDL_RENDERER_ACCELERATED);
+        SDL_SetRenderDrawBlendMode(_renderer_handle, SDL_BLENDMODE_BLEND);
     }
 
     SDL2Renderer::~SDL2Renderer()

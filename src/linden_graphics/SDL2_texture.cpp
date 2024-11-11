@@ -8,6 +8,7 @@ namespace linden::graphics
         _texture = SDL_CreateTexture(
             renderer.get_sdl2_renderer_handle(), SDL_PIXELFORMAT_ARGB8888,
             static_cast<int>(access), size.width, size.height);
+        SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
         // TODO: Exception
     }
 
@@ -66,6 +67,7 @@ namespace linden::graphics
 
         pixel_data[position.y * (_pitch / 4) + position.x] =
             (color.a << 24) | (color.b << 16) | (color.g << 8) | color.r;
+        asm("nop");
     }
 
     void* SDL2StreamingTexture::get_pixels() const
