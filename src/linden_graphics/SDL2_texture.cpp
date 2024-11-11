@@ -41,7 +41,7 @@ namespace linden::graphics
 
     void SDL2StreamingTexture::lock()
     {
-        if (SDL_LockTexture(SDL2Texture::_texture, NULL, &_pixels, &_pitch) < 0)
+        if (SDL_LockTexture(_texture, NULL, &_pixels, &_pitch) < 0)
         {
             // TODO: Exception
             return;
@@ -51,7 +51,7 @@ namespace linden::graphics
 
     void SDL2StreamingTexture::unlock()
     {
-        SDL_UnlockTexture(SDL2Texture::_texture);
+        SDL_UnlockTexture(_texture);
         _locked = false;
     }
 

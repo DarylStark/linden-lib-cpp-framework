@@ -34,9 +34,6 @@ namespace linden::graphics
 
     class SDL2StaticTexture : public SDL2Texture
     {
-    private:
-        SDL_Texture* _texture;
-
     public:
         SDL2StaticTexture(const SDL2Renderer& renderer, Size size);
     };
@@ -44,7 +41,6 @@ namespace linden::graphics
     class SDL2StreamingTexture : public SDL2Texture
     {
     private:
-        SDL_Texture* _texture;
         void* _pixels;
         int _pitch;
         bool _locked = false;
@@ -67,10 +63,8 @@ namespace linden::graphics
 
     class SDL2TargetTexture : public SDL2Texture
     {
-    private:
-        SDL_Texture* _texture;
-
     public:
         SDL2TargetTexture(const SDL2Renderer& renderer, Size size);
     };
+
 }  // namespace linden::graphics
