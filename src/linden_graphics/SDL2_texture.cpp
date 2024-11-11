@@ -12,7 +12,7 @@ namespace linden::graphics
         // TODO: Exception
     }
 
-    SDL2Texture ::~SDL2Texture()
+    SDL2Texture::~SDL2Texture()
     {
         if (_texture != nullptr) SDL_DestroyTexture(_texture);
     }
@@ -20,6 +20,11 @@ namespace linden::graphics
     SDL_Texture* SDL2Texture::get_sdl2_texture_handle() const
     {
         return _texture;
+    }
+
+    void SDL2Texture::set_alpha(uint8_t alpha)
+    {
+        SDL_SetTextureAlphaMod(_texture, alpha);
     }
 
     SDL2StaticTexture::SDL2StaticTexture(const SDL2Renderer& renderer,

@@ -27,6 +27,9 @@ namespace linden::graphics
 
         // Get native SDL2 handle
         SDL_Texture* get_sdl2_texture_handle() const;
+
+        // Texture altering
+        void set_alpha(uint8_t alpha);
     };
 
     class SDL2StaticTexture : public SDL2Texture
