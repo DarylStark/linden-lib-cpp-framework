@@ -56,6 +56,8 @@ namespace linden::graphics
             options.size.width = texture.get_size().width;
         if (options.size.height == 0)
             options.size.height = texture.get_size().height;
+        options.size.width *= options.scale;
+        options.size.height *= options.scale;
 
         SDL_Rect rect;
         rect.x = options.position.x;
@@ -67,8 +69,10 @@ namespace linden::graphics
         if (options.flip_horizontal) flip |= SDL_FLIP_HORIZONTAL;
         if (options.flip_vertical) flip |= SDL_FLIP_VERTICAL;
 
+        SDL_Point center = {options.rotation_center.x,
+                            options.rotation_center.y};
         SDL_RenderCopyEx(_renderer_handle, texture.get_sdl2_texture_handle(),
-                         nullptr, &rect, options.angle, nullptr,
+                         nullptr, &rect, options.angle, &center,
                          static_cast<SDL_RendererFlip>(flip));
     }
 };  // namespace linden::graphics

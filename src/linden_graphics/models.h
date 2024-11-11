@@ -32,5 +32,6 @@ namespace linden::graphics
         Position rotation_center = {0, 0};
         bool flip_horizontal = false;
         bool flip_vertical = false;
+        uint32_t scale = 1;
     };
 }  // namespace linden::graphics
