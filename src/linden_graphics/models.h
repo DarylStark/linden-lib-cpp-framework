@@ -26,11 +26,11 @@ namespace linden::graphics
     struct TextureRenderOptions
     {
         bool active = true;
-        Position position;
-        Size size;
-        double angle;
-        Position rotation_center;
-        bool flip_horizontal;
-        bool flip_vertical;
+        Position position = {0, 0};
+        Size size = {0, 0};
+        double angle = 0.0;
+        Position rotation_center = {0, 0};
+        bool flip_horizontal = false;
+        bool flip_vertical = false;
     };
 }  // namespace linden::graphics

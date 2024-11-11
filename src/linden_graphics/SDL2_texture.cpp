@@ -6,8 +6,14 @@
 
 namespace linden::graphics
 {
+    SDL2Texture::SDL2Texture(const SDL2Renderer& renderer)
+        : _texture(nullptr), _renderer(renderer)
+    {
+    }
+
     SDL2Texture::SDL2Texture(const SDL2Renderer& renderer, TextureAccess access,
                              Size size)
+        : _renderer(renderer)
     {
         _texture = SDL_CreateTexture(
             renderer.get_sdl2_renderer_handle(), SDL_PIXELFORMAT_ARGB8888,
@@ -36,6 +42,26 @@ namespace linden::graphics
         int width, height;
         SDL_QueryTexture(_texture, nullptr, nullptr, &width, &height);
         return {width, height};
+    }
+
+    std::shared_ptr<SDL2Texture> SDL2Texture::create_sub_texture(
+        Position position, Size size) const
+    {
+        std::shared_ptr<SDL2Texture> sub_texture =
+            std::make_shared<SDL2TargetTexture>(_renderer, size);
+
+        SDL_Texture* sub_texture_handle =
+            sub_texture->get_sdl2_texture_handle();
+
+        SDL_Rect rect = {position.x, position.y, size.width, size.height};
+        int32_t srt_r = SDL_SetRenderTarget(
+            _renderer.get_sdl2_renderer_handle(), sub_texture_handle);
+        int32_t src_r = SDL_RenderCopy(_renderer.get_sdl2_renderer_handle(),
+                                       _texture, &rect, nullptr);
+        int32_t srt2_r =
+            SDL_SetRenderTarget(_renderer.get_sdl2_renderer_handle(), nullptr);
+
+        return sub_texture;
     }
 
     SDL2StaticTexture::SDL2StaticTexture(const SDL2Renderer& renderer,
@@ -105,6 +131,7 @@ namespace linden::graphics
 
     SDL2ImageTexture::SDL2ImageTexture(const SDL2Renderer& renderer,
                                        const std::string& path)
+        : SDL2Texture(renderer)
     {
         SDL_Surface* surface = IMG_Load(path.c_str());
         _texture = SDL_CreateTextureFromSurface(

@@ -52,6 +52,11 @@ namespace linden::graphics
     {
         if (!options.active) return;
 
+        if (options.size.width == 0)
+            options.size.width = texture.get_size().width;
+        if (options.size.height == 0)
+            options.size.height = texture.get_size().height;
+
         SDL_Rect rect;
         rect.x = options.position.x;
         rect.y = options.position.y;

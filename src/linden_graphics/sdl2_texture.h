@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 
+#include <memory>
 #include <string>
 
 #include "models.h"
@@ -25,10 +26,11 @@ namespace linden::graphics
     class SDL2Texture
     {
     protected:
+        const SDL2Renderer& _renderer;
         SDL_Texture* _texture;
-        SDL2Texture() = default;
 
     public:
+        SDL2Texture(const SDL2Renderer& renderer);
         SDL2Texture(const SDL2Renderer& renderer, TextureAccess access,
                     Size size);
         ~SDL2Texture();
@@ -41,6 +43,10 @@ namespace linden::graphics
 
         // Get texture information
         Size get_size() const;
+
+        // Subtextures
+        std::shared_ptr<SDL2Texture> create_sub_texture(Position position,
+                                                        Size size) const;
     };
 
     class SDL2StaticTexture : public SDL2Texture
