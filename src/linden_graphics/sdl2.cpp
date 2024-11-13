@@ -1,6 +1,7 @@
 #include "sdl2.h"
 
 #include <SDL2/SDL.h>
+#include <SDL_ttf.h>
 
 #include "sdl2_window.h"
 
@@ -8,8 +9,14 @@ namespace linden::graphics
 {
     SDL2::SDL2()
     {
-        int init = SDL_Init(SDL_INIT_VIDEO);
-        if (init != 0)
+        int init_sdl = SDL_Init(SDL_INIT_VIDEO);
+        if (init_sdl != 0)
+        {
+            // TODO: Throw exception
+        }
+
+        int init_ttf = TTF_Init();
+        if (init_ttf != 0)
         {
             // TODO: Throw exception
         }
@@ -17,6 +24,7 @@ namespace linden::graphics
 
     SDL2::~SDL2()
     {
+        TTF_Quit();
         SDL_Quit();
     }
 
