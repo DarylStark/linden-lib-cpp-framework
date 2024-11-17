@@ -1,5 +1,3 @@
-#pragma once
-
 #include "exceptions.h"
 
 namespace linden

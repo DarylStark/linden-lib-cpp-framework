@@ -22,7 +22,7 @@ namespace linden
         Exception(const ExceptionSeverity& _severity,
                   const std::string& message);
 
-        const ExceptionSeverity Exception::severity() const noexcept;
+        const ExceptionSeverity severity() const noexcept;
         const char* what() const noexcept override;
     };
 }  // namespace linden

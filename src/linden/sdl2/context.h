@@ -1,6 +1,6 @@
 #pragma once
 #include "../types.h"
-#include "sdl2_window.h"
+#include "window.h"
 
 namespace linden::sdl2
 {

@@ -20,7 +20,13 @@ namespace linden::sdl2
 
     SDL2WindowCreationException::SDL2WindowCreationException(
         const std::string& message)
-        : SDL2WindowCreationException(linden::ExceptionSeverity::FATAL, message)
+        : SDL2Exception(linden::ExceptionSeverity::FATAL, message)
+    {
+    }
+
+    SDL2RendererCreationException::SDL2RendererCreationException(
+        const std::string& message)
+        : SDL2Exception(linden::ExceptionSeverity::FATAL, message)
     {
     }
 }  // namespace linden::sdl2
