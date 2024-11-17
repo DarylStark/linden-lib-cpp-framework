@@ -21,6 +21,14 @@ namespace linden::graphics
     {
         int width;
         int height;
+
+        Size operator*(const int multiplier) const
+        {
+            return {
+                .width = width * multiplier,
+                .height = height * multiplier,
+            };
+        }
     };
 
     struct TextureRenderOptions
