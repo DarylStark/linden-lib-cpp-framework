@@ -21,8 +21,14 @@ namespace linden::sdl2
 
     void Renderer::initialize(SDL_Window* window_handle)
     {
+        if (_renderer_handle)
+            throw SDL2RendererCreationException(
+                "SDL2 renderer already initialized");
+
+        // TODO: Make the flags configurable
         _renderer_handle =
             SDL_CreateRenderer(window_handle, -1, SDL_RENDERER_ACCELERATED);
+
         if (!_renderer_handle)
             throw SDL2RendererCreationException(
                 "Failed to create SDL2 renderer: " +
@@ -32,5 +38,21 @@ namespace linden::sdl2
     SDL_Renderer* Renderer::get_sdl2_renderer_handle() const
     {
         return _renderer_handle;
+    }
+
+    void Renderer::present()
+    {
+        SDL_RenderPresent(_renderer_handle);
+    }
+
+    void Renderer::set_draw_color(const linden::Color& color)
+    {
+        SDL_SetRenderDrawColor(_renderer_handle, color.red, color.green,
+                               color.blue, color.alpha);
+    }
+
+    void Renderer::clear()
+    {
+        SDL_RenderClear(_renderer_handle);
     }
 }  // namespace linden::sdl2

@@ -14,7 +14,7 @@ namespace linden::sdl2
                                               std::string(SDL_GetError()));
 
         // Create the renderer
-        _renderer = Renderer(_window_handle);
+        _renderer.initialize(_window_handle);
 
         return;
     }

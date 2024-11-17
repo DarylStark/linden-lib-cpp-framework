@@ -16,5 +16,8 @@ namespace linden::sdl2
         // Retrieve objects
         Window create_window(const std::string& title,
                              linden::Position position, linden::Size size);
+
+        // Delay
+        void delay(uint32_t milliseconds);
     };
 }  // namespace linden::sdl2

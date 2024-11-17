@@ -38,8 +38,11 @@ namespace linden::sdl2
                                   linden::Position position, linden::Size size)
     {
         // TODO: Make the flags configurable
-        Window window(title, position, size, SDL_WINDOW_SHOWN);
+        return Window(title, position, size, SDL_WINDOW_SHOWN);
+    }
 
-        return std::move(window);
+    void Context::delay(uint32_t milliseconds)
+    {
+        SDL_Delay(milliseconds);
     }
 }  // namespace linden::sdl2

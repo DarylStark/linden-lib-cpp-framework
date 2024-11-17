@@ -4,18 +4,16 @@
 
 namespace linden
 {
-    class Color
+    struct Color
     {
-    public:
         uint8_t red;
         uint8_t green;
         uint8_t blue;
         uint8_t alpha;
     };
 
-    class Position
+    struct Position
     {
-    public:
         int x;
         int y;
     };

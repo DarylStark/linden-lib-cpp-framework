@@ -25,5 +25,10 @@ namespace linden::sdl2
 
         // Retrievers for SDL2 handles
         SDL_Renderer* get_sdl2_renderer_handle() const;
+
+        // Render methods
+        void present();
+        void set_draw_color(const linden::Color& color);
+        void clear();
     };
 }  // namespace linden::sdl2
