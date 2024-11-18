@@ -30,18 +30,18 @@ namespace linden::sdl2
         if (_window_handle) SDL_DestroyWindow(_window_handle);
     }
 
-    Size Window::get_window_size() const
+    Size Window::get_size() const
     {
         int width, height;
         SDL_GetWindowSize(_window_handle, &width, &height);
-        return {width, height};
+        return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)};
     }
 
     Size Window::get_drawable_size() const
     {
         int width, height;
         SDL_GL_GetDrawableSize(_window_handle, &width, &height);
-        return {width, height};
+        return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)};
     }
 
     Position Window::get_window_position() const
@@ -59,12 +59,5 @@ namespace linden::sdl2
     SDL_Window* Window::get_sdl2_window_handle() const
     {
         return _window_handle;
-    }
-
-    linden::Size Window::get_size() const
-    {
-        int width, height;
-        SDL_GetWindowSize(_window_handle, &width, &height);
-        return {width, height};
     }
 }  // namespace linden::sdl2

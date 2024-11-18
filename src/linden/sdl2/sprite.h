@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 
-#include "redenerable.h"
+#include "renderable.h"
 #include "renderer.h"
 
 namespace linden::sdl2

@@ -25,7 +25,7 @@ namespace linden::sdl2
         void cleanup();
 
         // Retrieve window information
-        Size get_window_size() const;
+        Size get_size() const;
         Size get_drawable_size() const;
         Position get_window_position() const;
 
@@ -34,8 +34,5 @@ namespace linden::sdl2
 
         // Retrievers for SDL2 handles
         SDL_Window* get_sdl2_window_handle() const;
-
-        // Window information
-        virtual linden::Size get_size() const;
     };
 }  // namespace linden::sdl2

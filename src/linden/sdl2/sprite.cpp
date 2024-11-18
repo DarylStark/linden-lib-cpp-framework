@@ -64,6 +64,6 @@ namespace linden::sdl2
     {
         int width, height;
         SDL_QueryTexture(_texture_handle, nullptr, nullptr, &width, &height);
-        return {width, height};
+        return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)};
     }
 }  // namespace linden::sdl2

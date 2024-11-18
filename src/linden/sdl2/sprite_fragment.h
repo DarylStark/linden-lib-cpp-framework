@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../types.h"
-#include "redenerable.h"
+#include "renderable.h"
 #include "sprite.h"
 
 namespace linden::sdl2
