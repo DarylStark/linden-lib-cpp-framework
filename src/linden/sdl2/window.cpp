@@ -60,4 +60,11 @@ namespace linden::sdl2
     {
         return _window_handle;
     }
+
+    linden::Size Window::get_size() const
+    {
+        int width, height;
+        SDL_GetWindowSize(_window_handle, &width, &height);
+        return {width, height};
+    }
 }  // namespace linden::sdl2

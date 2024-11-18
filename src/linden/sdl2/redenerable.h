@@ -29,6 +29,10 @@ namespace linden::sdl2
     class Renderable
     {
     public:
-        virtual void render(const RenderConfig& configuration) = 0;
+        // Virtual methods
+        virtual void render(RenderConfig configuration) = 0;
+        virtual linden::Size get_size() const = 0;
+
+        RenderConfig& update_render_config(RenderConfig& configuration) const;
     };
 }  // namespace linden::sdl2

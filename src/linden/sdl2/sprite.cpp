@@ -17,11 +17,13 @@ namespace linden::sdl2
         if (_texture_handle != nullptr) SDL_DestroyTexture(_texture_handle);
     }
 
-    void Sprite::render(const RenderConfig& configuration)
+    void Sprite::render(RenderConfig configuration)
     {
         // Stop if there is nothing to do
         if (!_texture_handle) return;
         if (!configuration.active) return;
+
+        update_render_config(configuration);
 
         SDL_Rect dst;
         dst.x = configuration.destination.position.x;
@@ -56,5 +58,12 @@ namespace linden::sdl2
     SDL_Texture* Sprite::get_sdl2_texture_handle() const
     {
         return _texture_handle;
+    }
+
+    linden::Size Sprite::get_size() const
+    {
+        int width, height;
+        SDL_QueryTexture(_texture_handle, nullptr, nullptr, &width, &height);
+        return {width, height};
     }
 }  // namespace linden::sdl2

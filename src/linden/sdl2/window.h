@@ -34,5 +34,8 @@ namespace linden::sdl2
 
         // Retrievers for SDL2 handles
         SDL_Window* get_sdl2_window_handle() const;
+
+        // Window information
+        virtual linden::Size get_size() const;
     };
 }  // namespace linden::sdl2

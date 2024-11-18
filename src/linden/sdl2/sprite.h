@@ -20,12 +20,15 @@ namespace linden::sdl2
         void cleanup();
 
         // Render methods
-        virtual void render(const RenderConfig& configuration) override;
+        virtual void render(RenderConfig configuration) override;
 
         // Retriever for our objects
         Renderer& get_renderer_handle() const;
 
         // Retrievers for SDL2 handles
         SDL_Texture* get_sdl2_texture_handle() const;
+
+        // Sprite information
+        virtual linden::Size get_size() const;
     };
 }  // namespace linden::sdl2

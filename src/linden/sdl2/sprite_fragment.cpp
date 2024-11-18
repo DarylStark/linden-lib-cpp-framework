@@ -8,8 +8,10 @@ namespace linden::sdl2
     {
     }
 
-    void SpriteFragment::render(const RenderConfig& configuration)
+    void SpriteFragment::render(RenderConfig configuration)
     {
+        update_render_config(configuration);
+
         linden::Size new_size = configuration.source.size;
         if (configuration.source.position.x + configuration.source.size.width >
             _size.width)
@@ -33,5 +35,10 @@ namespace linden::sdl2
                        .size = new_size},
             .rotation = configuration.rotation,
         });
+    }
+
+    linden::Size SpriteFragment::get_size() const
+    {
+        return _size;
     }
 }  // namespace linden::sdl2
