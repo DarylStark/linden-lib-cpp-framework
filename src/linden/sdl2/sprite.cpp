@@ -47,4 +47,14 @@ namespace linden::sdl2
                          configuration.rotation.angle, &center,
                          static_cast<SDL_RendererFlip>(flip));
     }
+
+    Renderer& Sprite::get_renderer_handle() const
+    {
+        return _renderer_handle;
+    }
+
+    SDL_Texture* Sprite::get_sdl2_texture_handle() const
+    {
+        return _texture_handle;
+    }
 }  // namespace linden::sdl2

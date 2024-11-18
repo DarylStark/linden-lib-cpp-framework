@@ -30,5 +30,8 @@ namespace linden::sdl2
         void present();
         void set_draw_color(const linden::Color& color);
         void clear();
+
+        // Target control
+        void reset_target();
     };
 }  // namespace linden::sdl2

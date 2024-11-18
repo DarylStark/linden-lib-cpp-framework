@@ -4,7 +4,7 @@
 
 namespace linden::sdl2
 {
-    Renderer::Renderer(SDL_Window* window_handle)
+    Renderer::Renderer(SDL_Window* window_handle) : _renderer_handle(nullptr)
     {
         initialize(window_handle);
     }
@@ -21,9 +21,7 @@ namespace linden::sdl2
 
     void Renderer::initialize(SDL_Window* window_handle)
     {
-        if (_renderer_handle)
-            throw SDL2RendererCreationException(
-                "SDL2 renderer already initialized");
+        if (_renderer_handle) return;
 
         // TODO: Make the flags configurable
         _renderer_handle =
@@ -54,5 +52,10 @@ namespace linden::sdl2
     void Renderer::clear()
     {
         SDL_RenderClear(_renderer_handle);
+    }
+
+    void Renderer::reset_target()
+    {
+        SDL_SetRenderTarget(_renderer_handle, nullptr);
     }
 }  // namespace linden::sdl2

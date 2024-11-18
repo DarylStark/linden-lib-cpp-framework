@@ -21,5 +21,11 @@ namespace linden::sdl2
 
         // Render methods
         virtual void render(const RenderConfig& configuration) override;
+
+        // Retriever for our objects
+        Renderer& get_renderer_handle() const;
+
+        // Retrievers for SDL2 handles
+        SDL_Texture* get_sdl2_texture_handle() const;
     };
 }  // namespace linden::sdl2
