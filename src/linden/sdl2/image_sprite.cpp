@@ -8,6 +8,8 @@ namespace linden::sdl2
         : Sprite(renderer_handle)
     {
         SDL_Surface* surface = IMG_Load(path.c_str());
+        // TODO: Handle error
+
         _texture_handle = SDL_CreateTextureFromSurface(
             _renderer_handle.get_sdl2_renderer_handle(), surface);
         SDL_SetTextureBlendMode(_texture_handle, SDL_BLENDMODE_BLEND);
