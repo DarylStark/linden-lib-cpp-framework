@@ -4,7 +4,7 @@
 
 namespace linden::sdl2
 {
-    Renderer::Renderer(SDL_Window* window_handle) : _renderer_handle(nullptr)
+    Renderer::Renderer(SDL_Window* window_handle)
     {
         initialize(window_handle);
     }

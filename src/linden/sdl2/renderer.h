@@ -9,7 +9,7 @@ namespace linden::sdl2
     class Renderer
     {
     private:
-        SDL_Renderer* _renderer_handle;
+        SDL_Renderer* _renderer_handle = nullptr;
 
     public:
         Renderer() = default;
