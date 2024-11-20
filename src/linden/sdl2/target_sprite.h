@@ -9,5 +9,6 @@ namespace linden::sdl2
     {
     public:
         TargetSprite(Renderer& renderer_handle, linden::Size size);
+        virtual void fill(const linden::Color& color);
     };
 }  // namespace linden::sdl2
