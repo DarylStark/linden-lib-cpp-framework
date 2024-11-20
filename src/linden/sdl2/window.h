@@ -34,5 +34,10 @@ namespace linden::sdl2
 
         // Retrievers for SDL2 handles
         SDL_Window* get_sdl2_window_handle() const;
+
+        // Methods for the renderer. Will be delegated to the renderer object
+        void present();
+        void set_draw_color(const linden::Color& color);
+        void clear();
     };
 }  // namespace linden::sdl2

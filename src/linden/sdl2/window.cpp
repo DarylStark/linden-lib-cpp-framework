@@ -60,4 +60,17 @@ namespace linden::sdl2
     {
         return _window_handle;
     }
+
+    void Window::present()
+    {
+        _renderer.present();
+    }
+    void Window::set_draw_color(const linden::Color& color)
+    {
+        _renderer.set_draw_color(color);
+    }
+    void Window::clear()
+    {
+        _renderer.clear();
+    }
 }  // namespace linden::sdl2
