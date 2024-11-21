@@ -37,5 +37,6 @@ namespace linden::sdl2
         // Creation of sprite contents
         void fill(const linden::Color& color);
         void fill(const linden::Color& color, uint32_t col, uint32_t row);
+        void add_renderable(Renderable& renderable, RenderConfig render_config);
     };
 }  // namespace linden::sdl2

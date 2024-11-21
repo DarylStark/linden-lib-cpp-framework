@@ -1,5 +1,7 @@
 #include "tile_grid.h"
 
+#include "scoped_target.h"
+
 namespace linden::sdl2
 {
     TileGrid::TileGrid(Renderer &renderer, linden::Size grid_size,
@@ -92,5 +94,54 @@ namespace linden::sdl2
         uint32_t tile_index = get_tile_index(col, row);
         if (tile_index >= _tiles.size()) return;
         _tiles[tile_index].fill(color);
+    }
+
+    void TileGrid::add_renderable(Renderable &renderable,
+                                  RenderConfig render_config)
+    {
+        if (render_config.destination.position.x >= _grid_size.width ||
+            render_config.destination.position.y >= _grid_size.height)
+            return;
+
+        renderable.update_render_config(render_config);
+
+        // Find the tiles to render it to
+        uint32_t start_col =
+            render_config.destination.position.x / _tile_size.width;
+        uint32_t end_col = (render_config.destination.position.x +
+                            render_config.destination.size.width) /
+                           _tile_size.width;
+        uint32_t start_row =
+            render_config.destination.position.y / _tile_size.height;
+        uint32_t end_row = (render_config.destination.position.y +
+                            render_config.destination.size.height) /
+                           _tile_size.height;
+
+        // Loop over the tiles and render the texture to it
+        for (uint32_t y = start_row; y <= end_row; y++)
+        {
+            for (uint32_t x = start_col; x <= end_col; x++)
+            {
+                // Calculate X in tile
+                int32_t tile_x = render_config.destination.position.x -
+                                 (start_col * _tile_size.width);
+
+                if (x > start_col)
+                    tile_x = -((_tile_size.width * x) -
+                               render_config.destination.position.x);
+
+                // Calculate Y in tile
+                int32_t tile_y = render_config.destination.position.y -
+                                 (start_row * _tile_size.height);
+
+                if (y > start_row)
+                    tile_y = -((_tile_size.height * y) -
+                               render_config.destination.position.y);
+
+                ScopedTarget target(_tiles[get_tile_index(x, y)]);
+                renderable.render(
+                    {.destination = {.position = {.x = tile_x, .y = tile_y}}});
+            }
+        }
     }
 }  // namespace linden::sdl2
