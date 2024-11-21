@@ -35,26 +35,136 @@ namespace linden::sdl2
 
     void TileGrid::render(RenderConfig configuration)
     {
-        for (uint32_t row = 0; row < _rows; row++)
+        update_render_config(configuration);
+
+        if (configuration.source.size.width + configuration.source.position.x >
+            _grid_size.width)
+            configuration.source.size.width =
+                _grid_size.width - configuration.source.position.x;
+
+        if (configuration.source.size.height + configuration.source.position.y >
+            _grid_size.height)
+            configuration.source.size.height =
+                _grid_size.height - configuration.source.position.y;
+
+        // Calculate the resize level
+        float resize_x =
+            static_cast<float>(configuration.destination.size.width) /
+            static_cast<float>(configuration.source.size.width);
+        float resize_y =
+            static_cast<float>(configuration.destination.size.height) /
+            static_cast<float>(configuration.source.size.height);
+
+        // Find the tiles to render
+        uint32_t start_col = configuration.source.position.x / _tile_size.width;
+        uint32_t end_col = (configuration.source.position.x +
+                            configuration.source.size.width) /
+                           _tile_size.width;
+        if (end_col >= _cols) end_col = _cols - 1;
+
+        uint32_t start_row =
+            configuration.source.position.y / _tile_size.height;
+        uint32_t end_row = (configuration.source.position.y +
+                            configuration.source.size.height) /
+                           _tile_size.height;
+        if (end_row >= _rows) end_row = _rows - 1;
+
+        int32_t new_y = configuration.destination.position.y;
+        uint32_t last_height = 0;
+
+        for (uint32_t y = start_row; y <= end_row; y++)
         {
-            for (uint32_t col = 0; col < _cols; col++)
+            int32_t new_x = configuration.destination.position.x;
+
+            for (uint32_t x = start_col; x <= end_col; x++)
             {
-                auto &tile = _tiles[get_tile_index(col, row)];
+                RenderConfig render_config;
 
-                RenderConfig tile_configuration;
-                tile_configuration.destination.size = tile.get_size();
-                tile_configuration.source.size = tile.get_size();
+                // Source position
+                render_config.source.position.x = 0;
+                render_config.source.position.y = 0;
 
-                tile_configuration.destination.position = {
-                    static_cast<int32_t>((col * _tile_size.width) +
-                                         configuration.destination.position.x),
-                    static_cast<int32_t>((row * _tile_size.height) +
-                                         configuration.destination.position.y)};
+                // Source size
+                render_config.source.size.width = _tile_size.width;
+                render_config.source.size.height = _tile_size.height;
 
-                // TODO: only render if visible
+                // Destination position
+                render_config.destination.position.x = new_x;
+                render_config.destination.position.y = new_y;
 
-                tile.render(tile_configuration);
+                // Destination size
+                render_config.destination.size.width =
+                    _tile_size.width * resize_x;
+                render_config.destination.size.height =
+                    _tile_size.height * resize_y;
+
+                if (x == start_col)
+                {
+                    render_config.source.position.x =
+                        configuration.source.position.x -
+                        (_tile_size.width * x);
+                    render_config.source.size.width =
+                        _tile_size.width - render_config.source.position.x;
+                    render_config.destination.size.width =
+                        render_config.source.size.width * resize_x;
+                }
+
+                if (x == end_col)
+                {
+                    render_config.source.size.width =
+                        (configuration.source.size.width -
+                         (x * _tile_size.width)) +
+                        configuration.source.position.x;
+                    render_config.destination.size.width =
+                        render_config.source.size.width * resize_x;
+                }
+
+                if (y == start_row)
+                {
+                    render_config.source.position.y =
+                        configuration.source.position.y -
+                        (_tile_size.height * y);
+                    render_config.source.size.height =
+                        _tile_size.height - render_config.source.position.y;
+                    render_config.destination.size.height =
+                        render_config.source.size.height * resize_y;
+                }
+
+                if (y == end_row)
+                {
+                    render_config.source.size.height =
+                        (configuration.source.size.height -
+                         (y * _tile_size.height)) +
+                        configuration.source.position.y;
+                    render_config.destination.size.height =
+                        render_config.source.size.height * resize_y;
+                }
+
+                if (render_config.destination.position.x >=
+                    configuration.destination.position.x +
+                        configuration.destination.size.width)
+                    continue;
+
+                if (render_config.destination.position.y >=
+                    configuration.destination.position.y +
+                        configuration.destination.size.height)
+                    continue;
+
+                uint32_t tile_index = get_tile_index(x, y);
+                _tiles[tile_index].render(render_config);
+
+                new_x += render_config.destination.size.width;
+                last_height = render_config.destination.size.height;
+
+                if (new_x > configuration.destination.position.x +
+                                configuration.destination.size.width)
+                    break;
             }
+
+            new_y += last_height;
+            if (new_y > configuration.destination.position.y +
+                            configuration.destination.size.height)
+                break;
         }
     }
 
