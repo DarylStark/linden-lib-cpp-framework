@@ -61,6 +61,21 @@ namespace linden::sdl2
         return _grid_size;
     }
 
+    uint32_t TileGrid::get_tile_count() const
+    {
+        return _tiles.size();
+    }
+
+    uint32_t TileGrid::get_row_count() const
+    {
+        return _rows;
+    }
+
+    uint32_t TileGrid::get_col_count() const
+    {
+        return _cols;
+    }
+
     uint32_t TileGrid::get_tile_index(uint32_t col, uint32_t row) const
     {
         return row * _cols + col;

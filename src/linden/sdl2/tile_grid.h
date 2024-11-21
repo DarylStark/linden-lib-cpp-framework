@@ -30,6 +30,8 @@ namespace linden::sdl2
 
         // Retrieve information
         uint32_t get_tile_count() const;
+        uint32_t get_row_count() const;
+        uint32_t get_col_count() const;
         uint32_t get_tile_index(uint32_t col, uint32_t row) const;
 
         // Creation of sprite contents
