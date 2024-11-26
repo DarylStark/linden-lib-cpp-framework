@@ -89,8 +89,10 @@ namespace linden::sdl2
                 render_config.source.size.height = _tile_size.height;
 
                 // Destination position
-                render_config.destination.position.x = new_x;
-                render_config.destination.position.y = new_y;
+                render_config.destination.position.x =
+                    new_x + ((x + 1) * configuration.grid.gap_width);
+                render_config.destination.position.y =
+                    new_y + ((y + 1) * configuration.grid.gap_width);
 
                 // Destination size
                 render_config.destination.size.width =

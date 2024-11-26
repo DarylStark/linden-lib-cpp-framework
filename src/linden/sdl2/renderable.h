@@ -18,12 +18,18 @@ namespace linden::sdl2
         bool flip_vertical = false;
     };
 
+    struct GridConfig
+    {
+        uint32_t gap_width = 0;
+    };
+
     struct RenderConfig
     {
         bool active = true;
         RenderPosition destination;
         RenderPosition source;
         RenderRotation rotation;
+        GridConfig grid;
     };
 
     class Renderable
